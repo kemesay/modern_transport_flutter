@@ -8,11 +8,11 @@ import 'package:modern_transportation/reset_password_screen.dart';
 import 'package:modern_transportation/sign_up_screen.dart';
 
 void main() {
-  final authRepository = AuthRepository(baseUrl: 'http://192.168.140.173:5100');
+  final authRepository = AuthRepository(baseUrl: 'https://api.ethiosmartride.com');
   
   runApp(MyApp(authRepository: authRepository));
 }
-
+ 
 class MyApp extends StatelessWidget {
   final AuthRepository authRepository;
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: const Color.fromARGB(255, 8, 8, 8),
           ),
           
-          // Use `onGenerateRoute` to handle dynamic routes (like reset password)
+          // Use onGenerateRoute to handle dynamic routes (like reset password)
           onGenerateRoute: (settings) {
             // Parse the current route
             final Uri uri = Uri.parse(settings.name ?? '');
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
           // Static routes for signup and home
           routes: {
             '/signup': (context) => const SignUpScreen(),
-            '/home': (context) => const HomeScreen(),
+            '/home': (context) => const MapPage(),
           },
           
           // Define the initial route (login screen)
@@ -61,3 +61,32 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+//      import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+//      void main() => runApp(MyApp());
+
+//      class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//        @override
+//        Widget build(BuildContext context) {
+//          return MaterialApp(
+//            home: Scaffold(
+//              appBar: AppBar(
+//                title: const Text('Google Maps in Flutter'),
+//              ),
+//              body: const GoogleMap(
+//                initialCameraPosition: CameraPosition(
+//                  target: LatLng(37.7749, -122.4194),
+//                  zoom: 10,
+//                ),
+//              ),
+//            ),
+//          );
+//        }
+     
+
+//      }

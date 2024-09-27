@@ -15,7 +15,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   Future<void> _sendPasswordResetEmail(String email) async {
     final url =
-        Uri.parse('http://192.168.140.173:5100/api/v1/auth/forgot-password');
+        Uri.parse('http://192.168.1.110:5100/api/v1/auth/forgot-password');
     final response = await http.post(
       url,
       body: '{"email": "$email"}',

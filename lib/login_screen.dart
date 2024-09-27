@@ -26,77 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     super.dispose();
   }
-
-  // Function to show dialog and handle the forgot password request
-  // Future<void> _showForgotPasswordDialog() async {
-  //   final TextEditingController forgotPasswordController = TextEditingController();
-  //   return showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //         title: const Text('Forgot Password'),
-  //         content: TextFormField(
-  //           controller: forgotPasswordController,
-  //           decoration: const InputDecoration(
-  //             hintText: 'Enter your email',
-  //           ),
-  //         ),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () {
-  //               Navigator.of(context).pop(); // Close the dialog
-  //             },
-  //             child: const Text('Cancel'),
-  //           ),
-  //           TextButton(
-  //             onPressed: () async {
-  //               // Perform API call to send the forgot password email
-  //               final email = forgotPasswordController.text.trim();
-  //               if (email.isNotEmpty) {
-  //                 final response = await _sendForgotPasswordEmail(email);
-  //                 // ignore: use_build_context_synchronously
-  //                 Navigator.of(context).pop(); // Close the dialog
-  //                 if (response) {
-  //                   // ignore: use_build_context_synchronously
-  //                   ScaffoldMessenger.of(context).showSnackBar(
-  //                     const SnackBar(content: Text('Reset link sent to your email')),
-  //                   );
-  //                 } else {
-  //                   // ignore: use_build_context_synchronously
-  //                   ScaffoldMessenger.of(context).showSnackBar(
-  //                     const SnackBar(content: Text('Failed to send reset link')),
-  //                   );
-  //                 }
-  //               } else {
-  //                 ScaffoldMessenger.of(context).showSnackBar(
-  //                   const SnackBar(content: Text('Please enter your email')),
-  //                 );
-  //               }
-  //             },
-  //             child: const Text('Submit'),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
-  // // Send forgot password request to the server
-  // Future<bool> _sendForgotPasswordEmail(String email) async {
-  //   final url = Uri.parse('http://localhost:5100/api/v1/auth/forgot-password');
-  //   final response = await http.post(
-  //     url,
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: jsonEncode({'email': email}),
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
+                builder: (context) => const MapPage(),
               ),
               (route) => false,
             );
@@ -131,19 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
           return SingleChildScrollView(
             child: Center(
-              // child: Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset('assets/images/image15.png'),
-                  //    const Text(
-                  //   'Sign in.',
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     fontSize: 50,
-                  //   ),
-                  // ),
                   const SizedBox(height: 50),
                   const SocialButton(
                       iconPath: 'assets/svgs/g_logo.svg',
@@ -262,7 +181,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              // ),
             ),
           );
         },

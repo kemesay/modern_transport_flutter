@@ -18,7 +18,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final passwordController = TextEditingController();
 
   Future<void> _resetPassword(String newPassword) async {
-    final url = Uri.parse('http://192.168.140.173:5100/api/v1/auth/reset-password');
+    final url = Uri.parse('http://192.168.1.110:5100/api/v1/auth/reset-password');
     final response = await http.post(
       url,
       body: '{"token": "${widget.resetToken}", "newPassword": "$newPassword"}',
