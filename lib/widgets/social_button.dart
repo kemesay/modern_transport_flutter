@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modern_transportation/pallete.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 class SocialButton extends StatelessWidget {
   final String iconPath;
   final String label;
@@ -29,7 +30,8 @@ class SocialButton extends StatelessWidget {
         ),
       ),
       style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 30, horizontal: horizontalPadding),
+        padding:
+            EdgeInsets.symmetric(vertical: 30, horizontal: horizontalPadding),
         shape: RoundedRectangleBorder(
           side: const BorderSide(
             color: Pallete.borderColor,

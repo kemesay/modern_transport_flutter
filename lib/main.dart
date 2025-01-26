@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modern_transportation/bloc/auth_bloc.dart';
-import 'package:modern_transportation/home_screen.dart';
+import 'package:modern_transportation/pages/home_page.dart';
+import 'package:modern_transportation/pages/phone_reg_page.dart';
 import 'package:modern_transportation/repositories/auth_repository.dart';
-import 'package:modern_transportation/login_screen.dart';
-import 'package:modern_transportation/reset_password_screen.dart';
-import 'package:modern_transportation/sign_up_screen.dart';
+import 'package:modern_transportation/pages/login_page.dart';
+import 'package:modern_transportation/pages/password_reset_page.dart';
+import 'package:modern_transportation/pages/sign_up_page.dart';
 
 void main() {
-  final authRepository = AuthRepository(baseUrl: 'https://api.ethiosmartride.com');
+  final authRepository = AuthRepository(baseUrl: 'https://api.odatransportation.com');
   
   runApp(MyApp(authRepository: authRepository));
 }
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       child: BlocProvider(
         create: (context) => AuthBloc(authRepository: authRepository),
         child: MaterialApp(
-          title: 'Modern Transportation',
+          title: 'Oda Transportation',
           debugShowCheckedModeBanner: false, // Disable the debug banner
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: const Color.fromARGB(255, 8, 8, 8),
@@ -51,11 +52,11 @@ class MyApp extends StatelessWidget {
           // Static routes for signup and home
           routes: {
             '/signup': (context) => const SignUpScreen(),
-            '/home': (context) => const MapPage(),
+            '/home': (context) => const LoginScreen(),
           },
           
           // Define the initial route (login screen)
-          home: const LoginScreen(),
+          home: const PhoneRegPage(),
         ),
       ),
     );

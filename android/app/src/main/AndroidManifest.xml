@@ -7,7 +7,7 @@
 
     
     <application
-        android:label="modern_transportation"
+        android:label="Oda Transportation"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -30,7 +30,7 @@
 
               <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                 android:value="AIzaSyA_fN9V9-g_7PFuRCoXJGx0uGfvPpPIckM"/>
+                 android:value="AIzaSyCvm85RFSLVS4DV7zBb1l0UlOJ1tpSXRPQ"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

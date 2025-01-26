@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modern_transportation/bloc/auth_bloc.dart'; // Assuming SignUp uses AuthBloc
-import 'package:modern_transportation/login_screen.dart';
+import 'package:modern_transportation/pages/login_page.dart';
 import 'package:modern_transportation/pallete.dart';
 import 'package:modern_transportation/widgets/login_field.dart'; // Reusable input fields
 import 'package:modern_transportation/widgets/gradient_button.dart'; // Custom button

@@ -5,14 +5,15 @@ class LoginField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final bool obscureText; // Add obscureText property
-  final Widget suffixIcon; // Accept any Widget for suffixIcon, not just IconButton
+  final Widget
+      suffixIcon; // Accept any Widget for suffixIcon, not just IconButton
 
   const LoginField({
     super.key,
     required this.hintText,
     required this.controller,
-    required this.obscureText,  // Required for password visibility
-    required this.suffixIcon,   // Required for adding an icon (like visibility toggle)
+    required this.obscureText, // Required for password visibility
+    required this.suffixIcon, // Required for adding an icon (like visibility toggle)
   });
 
   @override
@@ -23,7 +24,8 @@ class LoginField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
-        obscureText: obscureText, // Set the obscureText property for password fields
+        obscureText:
+            obscureText, // Set the obscureText property for password fields
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(
