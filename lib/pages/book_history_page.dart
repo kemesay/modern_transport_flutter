@@ -59,7 +59,7 @@ class RideHistoryPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Ride History",
+                  "Book History",
                   style: CustomStyles.cardBoldTextStyle,
                 ),
               ],

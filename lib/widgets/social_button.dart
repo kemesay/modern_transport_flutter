@@ -20,21 +20,20 @@ class SocialButton extends StatelessWidget {
       icon: SvgPicture.asset(
         iconPath,
         width: 25,
-        color: const Color.fromARGB(255, 232, 232, 234),
+        color: Pallete.textFieldBgColor,
       ),
       label: Text(
         label,
-        style: const TextStyle(
-          color: Pallete.whiteColor,
+        style: TextStyle(
+          color: Pallete.textFieldBgColor,
           fontSize: 17,
         ),
       ),
       style: TextButton.styleFrom(
-        padding:
-            EdgeInsets.symmetric(vertical: 30, horizontal: horizontalPadding),
+        padding: EdgeInsets.symmetric(vertical: 30, horizontal: horizontalPadding),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            color: Pallete.borderColor,
+          side: BorderSide(
+            color: Pallete.textFieldBgColor,
             width: 3,
           ),
           borderRadius: BorderRadius.circular(10),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:modern_transportation/utils/styles.dart';
 import 'package:modern_transportation/widgets/header_widget.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'book_taxi_page.dart';
+import 'book_page.dart';
 
 class OtpPage extends StatefulWidget {
   static const routeName = "otp-page";

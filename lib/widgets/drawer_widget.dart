@@ -1,15 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modern_transportation/pages/credit_card_page.dart';
 import 'package:modern_transportation/pages/promo_code_page.dart';
-import 'package:modern_transportation/pages/ride_history_page.dart';
+import 'package:modern_transportation/pages/book_history_page.dart';
 import 'package:modern_transportation/pages/settings_page.dart';
 import 'package:modern_transportation/pages/support_page.dart';
 import 'package:modern_transportation/utils/constants.dart';
 import 'package:modern_transportation/utils/styles.dart';
-import 'package:share/share.dart';
-
+import 'package:share_plus/share_plus.dart';
 
 
 class DrawerWidget extends StatelessWidget {
@@ -48,7 +46,7 @@ class DrawerWidget extends StatelessWidget {
                         .popAndPushNamed(RideHistoryPage.routeName);
                   },
                   child: Text(
-                    "Ride History",
+                    "Book History",
                     style: CustomStyles.cardBoldDarkDrawerTextStyle,
                   ),
                 ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:modern_transportation/utils/constants.dart';
 
 class HeaderWidget extends StatelessWidget {
   final double height;
@@ -15,7 +14,9 @@ class HeaderWidget extends StatelessWidget {
           // Road background
           Container(
             height: height,
-            color: const Color.fromRGBO(3, 167, 61, 1), // Green road color
+            // color: const Color.fromRGBO(3, 167, 61, 1), // Green road color
+            color: const Color(0xFF03930A), // Green road color
+
           ),
           // First black section
           Positioned(
@@ -27,44 +28,47 @@ class HeaderWidget extends StatelessWidget {
               color: Colors.black, // First black section
             ),
           ),
-          // White center line (road divider)
+          // // White center line (road divider)
+          // Positioned(
+          //   top: height / 2 - 80, // Adjust this for line placement
+          //   left: 0,
+          //   right: 0,
+          //   child: Container(
+          //     height: 5,
+          //     color: Colors.white, // White center line
+          //   ),
+          // ),
+          // // Second black section
+          // Positioned(
+          //   top: height / 2 - 75, // Adjust this for line placement
+          //   left: 0,
+          //   right: 0,
+          //   child: Container(
+          //     height: 40,
+          //     color: Colors.black, // Second black section
+          //   ),
+          // ),
+          // // Logo in the center of the road
+          // Positioned(
+          //   top: height / 2 - 122, // Adjust to center the logo
+          //   left: 0,
+          //   right: 0,
+          //   child: Center(
+          //     child: SizedBox(
+          //       width: 200,
+          //       child: Image.asset(
+          //         Constatnts.logo,
+          //         height: 89,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // // Text below the second black section
+
+          Image.asset('assets/images/image15.png'),
+          const SizedBox(height: 50),
           Positioned(
-            top: height / 2 - 80, // Adjust this for line placement
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 5,
-              color: Colors.white, // White center line
-            ),
-          ),
-          // Second black section
-          Positioned(
-            top: height / 2 - 75, // Adjust this for line placement
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 40,
-              color: Colors.black, // Second black section
-            ),
-          ),
-          // Logo in the center of the road
-          Positioned(
-            top: height / 2 - 122, // Adjust to center the logo
-            left: 0,
-            right: 0,
-            child: Center(
-              child: SizedBox(
-                width: 200,
-                child: Image.asset(
-                  Constatnts.logo,
-                  height: 89,
-                ),
-              ),
-            ),
-          ),
-          // Text below the second black section
-          Positioned(
-            top: height / 2 - 30, // Positioning text below the second black section
+            top: height / 2 +30, // Positioning text below the second black section
             left: 0,
             right: 0,
             child: const Center(

@@ -40,7 +40,7 @@ class CreditCardPage extends StatelessWidget {
                       height: 180,
                       cardNumber: "5399 4678 0987 5677",
                       expiryDate: "02/19",
-                      cardHolderName: "Melkamu .H",
+                      cardHolderName: "Sisa .A",
                       cvvCode: "789",
                       showBackView: false, onCreditCardWidgetChange: (CreditCardBrand ) {  },
                     );

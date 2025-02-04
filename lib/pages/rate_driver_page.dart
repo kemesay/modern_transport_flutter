@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:modern_transportation/pages/book_taxi_page.dart';
+import 'package:modern_transportation/pages/book_page.dart';
 import 'package:modern_transportation/utils/styles.dart';
 import 'package:modern_transportation/widgets/header_widget.dart';
 import 'package:smooth_star_rating_nsafe/smooth_star_rating.dart';
@@ -58,7 +58,7 @@ class _RateDriverPageState extends State<RateDriverPage> {
                         shape: BoxShape.circle,
                         color: Color(0xffd6d6d6),
                         boxShadow: [
-                          const BoxShadow(
+                          BoxShadow(
                               color: Color(0x29000000),
                               offset: Offset(0, 5),
                               blurRadius: 6,
@@ -90,15 +90,15 @@ class _RateDriverPageState extends State<RateDriverPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        _buildDurationTime("Time", "10 min"),
-                        _buildDurationTime("Price", "120 ETB"),
-                        _buildDurationTime("Distance", "10 km"),
+                        _buildDurationTime("Time", "20 min"),
+                        _buildDurationTime("Price", "120 USD"),
+                        _buildDurationTime("Distance", "20 km"),
                       ],
                     ),
                     SizedBox(
                       height: mQ.height * 0.05,
                     ),
-                    Text("Mesay",
+                    Text("Sisay.W",
                         textAlign: TextAlign.center,
                         style: CustomStyles.smallLightTextStyle),
                     Text(

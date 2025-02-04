@@ -65,7 +65,7 @@ class SupportPage extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: Color(0xffd6d6d6),
                         boxShadow: [
-                          const BoxShadow(
+                          BoxShadow(
                               color: Color(0x29000000),
                               offset: Offset(0, 5),
                               blurRadius: 6,
@@ -116,7 +116,7 @@ class SupportPage extends StatelessWidget {
                             height: 25,
                           ),
                           _buildRowWidgets(FontAwesomeIcons.instagram,
-                              "instagram", "https://www.instagram.com/odatransportation/profilecard/?igsh=NTc4MTIwNjQ2YQ=="),
+                              "instagram", "https://www.instagram.com/odatransportation/profilecar"),
                         ],
                       ),
                     )

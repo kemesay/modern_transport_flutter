@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modern_transportation/bloc/auth_bloc.dart';
-import 'package:modern_transportation/forgot_password_screen.dart';
+import 'package:modern_transportation/pages/forgot_password_page.dart';
 import 'package:modern_transportation/pages/home_page.dart';
 import 'package:modern_transportation/pages/sign_up_page.dart';
 import 'package:modern_transportation/widgets/gradient_button.dart';

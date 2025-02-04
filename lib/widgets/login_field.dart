@@ -26,7 +26,10 @@ class LoginField extends StatelessWidget {
         controller: controller,
         obscureText:
             obscureText, // Set the obscureText property for password fields
+        style: const TextStyle(color: Pallete.whiteColor), // Text inside field
         decoration: InputDecoration(
+          filled: true,
+          fillColor: const Color(0xFFEBE6E6),
           contentPadding: const EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
@@ -43,6 +46,7 @@ class LoginField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           hintText: hintText,
+          hintStyle: const TextStyle(color: Colors.grey),
           suffixIcon: suffixIcon, // Add the suffixIcon to InputDecoration
         ),
       ),

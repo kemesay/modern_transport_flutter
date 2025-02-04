@@ -92,7 +92,7 @@ class SettingsPage extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: Color(0xffd6d6d6),
                         boxShadow: [
-                          const BoxShadow(
+                          BoxShadow(
                               color: Color(0x29000000),
                               offset: Offset(0, 5),
                               blurRadius: 6,
@@ -111,7 +111,7 @@ class SettingsPage extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      "mesay Kebede",
+                      "Sisay .A",
                       textAlign: TextAlign.center,
                       style: CustomStyles.cardBoldDarkTextStyle,
                     ),
@@ -130,17 +130,17 @@ class SettingsPage extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           _buildRowWidget(
-                              FontAwesomeIcons.home, "home", "Dembal City Center, African Avenue"),
+                              FontAwesomeIcons.home, "home", "California, USA"),
                           const SizedBox(
                             height: 25,
                           ),
-                          _buildRowWidget(FontAwesomeIcons.businessTime, "Work",
-                              "Entoto Cafe, African Avenue"),
+                          _buildRowWidget(FontAwesomeIcons.businessTime, "Travel",
+                              "Los Angeles, Hollywood Boulevard"),
                           const SizedBox(
                             height: 25,
                           ),
                           _buildRowWidget(
-                              Icons.travel_explore, "Travel Booking", "Entoto PArk"),
+                              Icons.travel_explore, "Travel Booking", "Hollywood Boulevard"),
                         ],
                       ),
                     )

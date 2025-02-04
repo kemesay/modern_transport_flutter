@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:modern_transportation/pages/ride_details_page.dart';
+import 'package:modern_transportation/pages/book_details_page.dart';
 import 'package:modern_transportation/utils/styles.dart';
 
 
@@ -76,16 +76,16 @@ class RideHistoryWidget extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0, top: 30.0),
-                  child: _buildRideInfo("From", "Entoto Cafe, African Avenue",
-                      "My Office", Colors.green),
+                  child: _buildRideInfo("From", "California, USA",
+                      "Origin", Colors.green),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Padding(
                     padding: const EdgeInsets.only(left: 20, top: 5),
-                    child: _buildRideInfo("To", "Dembal City Center, African Avenue",
-                        "My Home", Colors.red)),
+                    child: _buildRideInfo("To", "Los Angeles, Hollywood Boulevard",
+                        "Destination", Colors.red)),
                 const SizedBox(
                   height: 30,
                 ),

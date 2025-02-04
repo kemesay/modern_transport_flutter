@@ -1,23 +1,23 @@
 import 'dart:async';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modern_transportation/model/card_model.dart';
 import 'package:modern_transportation/model/place_model.dart';
 import 'package:modern_transportation/model/ride_option_model.dart';
+import 'package:modern_transportation/provider/google_map_service.dart';
 import 'package:modern_transportation/utils/constants.dart';
 import 'package:modern_transportation/utils/styles.dart';
 import 'package:modern_transportation/widgets/drawer_widget.dart';
-
+import 'package:modern_transportation/widgets/location_typeahead_field.dart';
 
 import 'package:uuid/uuid.dart';
 
-import 'taxi_movement_page.dart';
+import 'Book_movement_page.dart';
 
 class BookTaxiPage extends StatefulWidget {
   static const routeName = "book-taxi-page";
@@ -52,6 +52,8 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
   PolylinePoints polylinePoints = PolylinePoints();
   bool _hasGottenCordinates = false;
   late LatLngBounds bound;
+  final bool useApiKey =
+      true; // Add this flag to control which polyline method to use
 
   final List<UserCardModel> _cards = [
     UserCardModel(
@@ -100,8 +102,8 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
 
   @override
   void initState() {
-    BitmapDescriptor.asset(
-            const ImageConfiguration(devicePixelRatio: 2.5), 'assets/images/taxi.png')
+    BitmapDescriptor.asset(const ImageConfiguration(devicePixelRatio: 2.5),
+            'assets/images/taxi.png')
         .then((onValue) {
       _taxilocation = onValue;
     });
@@ -136,88 +138,86 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
         onTap: () {}));
   }
 
-//   Future<void> getMyLocation() async {
-//     Position position = await Geolocator()
-//         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-// //    myLocation = LatLng(position.latitude, position.longitude);
-//     setState(() {
-//       myLocation = LatLng(6.31, 5.2139453);
-//     });
+  Future<void> getMyLocation() async {
+    // ignore: deprecated_member_use
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    myLocation = LatLng(position.latitude, position.longitude);
+    setState(() {
+      myLocation = LatLng(6.31, 5.2139453);
+    });
 
-//     print(position);
-//   }
-
-  // setPolylines() async {
-  //   polylineCoordinates.clear();
-  //   _polylines.clear();
-  //   List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
-  //       Constatnts.API_KEY,
-  //       _fromPlaceDetail.lat,zz
-  //       _fromPlaceDetail.lng,
-  //       _toPlaceDetail.lat,
-  //       _toPlaceDetail.lng);
-  //   if (result.isNotEmpty) {
-  //     result.forEach((PointLatLng point) {
-  //       polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-  //     });
-  //   }
-  //   setState(() {
-  //     Polyline polyline = Polyline(
-  //         polylineId: const PolylineId('poly'),
-  //         color: Colors.black,
-  //         width: 4,
-  //         points: polylineCoordinates);
-  //     _polylines.add(polyline);
-  //     _hasGottenCordinates = true;
-  //   });
-  // }
-
-setPolylines() async {
-  polylineCoordinates.clear();
-  _polylines.clear();
-
-  // Create PointLatLng for origin and destination
-  PointLatLng origin = PointLatLng(_fromPlaceDetail.lat, _fromPlaceDetail.lng);
-  PointLatLng destination = PointLatLng(_toPlaceDetail.lat, _toPlaceDetail.lng);
-
-  // Create the PolylineRequest
-  PolylineRequest request = PolylineRequest(
-    origin: origin,
-    destination: destination,
-    mode: TravelMode.driving, // You can change this to walking, bicycling, etc.
-    // googleApiKey: Constatnts.API_KEY,
-  );
-
-  // Get the PolylineResult using the PolylineRequest
-  PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-    request: request,
-  );
-
-  // Check if the result contains points
-  if (result.points.isNotEmpty) {
-    // Iterate through the result points and add them to polylineCoordinates
-    for (var point in result.points) {
-      polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-    }
+    print(position);
   }
 
-  // Update the state with the new polyline
-  setState(() {
-    Polyline polyline = Polyline(
-      polylineId: const PolylineId('poly'),
-      color: Colors.black,
-      width: 4,
-      points: polylineCoordinates,
+  // Method for setting polylines with Google API Key
+  Future<void> setPolylineWithApiKey() async {
+    polylineCoordinates.clear();
+    _polylines.clear();
+
+    PolylineRequest request = PolylineRequest(
+      origin: PointLatLng(_fromPlaceDetail.lat, _fromPlaceDetail.lng),
+      destination: PointLatLng(_toPlaceDetail.lat, _toPlaceDetail.lng),
+      mode: TravelMode.driving,
     );
-    _polylines.add(polyline);
-    _hasGottenCordinates = true;
-  });
-}
 
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      googleApiKey: Constatnts.API_KEY,
+      request: request,
+    );
 
+    if (result.points.isNotEmpty) {
+      for (var point in result.points) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+    }
 
+    setState(() {
+      _polylines.add(Polyline(
+          polylineId: const PolylineId('poly'),
+          color: Colors.black,
+          width: 4,
+          points: polylineCoordinates));
+      _hasGottenCordinates = true;
+    });
+  }
 
+  // Method for setting polylines without API Key
+  Future<void> setPolylineWithoutApiKey() async {
+    polylineCoordinates.clear();
+    _polylines.clear();
 
+    PointLatLng origin =
+        PointLatLng(_fromPlaceDetail.lat, _fromPlaceDetail.lng);
+    PointLatLng destination =
+        PointLatLng(_toPlaceDetail.lat, _toPlaceDetail.lng);
+
+    PolylineRequest request = PolylineRequest(
+      origin: origin,
+      destination: destination,
+      mode: TravelMode.driving,
+    );
+
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      request: request,
+    );
+
+    if (result.points.isNotEmpty) {
+      for (var point in result.points) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+    }
+
+    setState(() {
+      _polylines.add(Polyline(
+        polylineId: const PolylineId('poly'),
+        color: Colors.black,
+        width: 4,
+        points: polylineCoordinates,
+      ));
+      _hasGottenCordinates = true;
+    });
+  }
 
   void _moveCamera(
       PlaceDetail fromplaceDetail, PlaceDetail toPlaceDetail) async {
@@ -226,53 +226,51 @@ setPolylines() async {
         _markers.clear();
       });
     }
-    if (toPlaceDetail != null) {
-      getLatLngBounds(LatLng(fromplaceDetail.lat, fromplaceDetail.lng),
-          LatLng(toPlaceDetail.lat, toPlaceDetail.lng));
-      GoogleMapController controller = await _controller.future;
-      CameraUpdate u2 = CameraUpdate.newLatLngBounds(bound, 50);
-      controller.animateCamera(u2).then((void v) {
-        check(u2, controller);
-      });
-      // controller.animateCamera(CameraUpdate.newLatLng(
-      //   LatLng(_toPlaceDetail.lat, _toPlaceDetail.lng),
-      // ));
-    }
-
-    setState(() {
-      if (fromplaceDetail != null) {
-        _markers.add(
-          Marker(
-            markerId: MarkerId(fromplaceDetail.placeId),
-            position: LatLng(fromplaceDetail.lat, fromplaceDetail.lng),
-            icon: _mylocation,
-            infoWindow: InfoWindow(
-              title: "pick up",
-              snippet: fromplaceDetail.formattedAddress,
-            ),
-          ),
-        );
-      }
-
-      if (toPlaceDetail != null) {
-        _markers.add(
-          Marker(
-            markerId: MarkerId(toPlaceDetail.placeId),
-            position: LatLng(toPlaceDetail.lat, toPlaceDetail.lng),
-            icon: _mydestination,
-            infoWindow: InfoWindow(
-              title: "destination",
-              snippet: toPlaceDetail.formattedAddress,
-            ),
-          ),
-        );
-      }
+    getLatLngBounds(LatLng(fromplaceDetail.lat, fromplaceDetail.lng),
+        LatLng(toPlaceDetail.lat, toPlaceDetail.lng));
+    GoogleMapController controller = await _controller.future;
+    CameraUpdate u2 = CameraUpdate.newLatLngBounds(bound, 50);
+    controller.animateCamera(u2).then((void v) {
+      check(u2, controller);
     });
+    controller.animateCamera(CameraUpdate.newLatLng(
+      LatLng(_toPlaceDetail.lat, _toPlaceDetail.lng),
+    ));
+  
+    setState(() {
+      _markers.add(
+        Marker(
+          markerId: MarkerId(fromplaceDetail.placeId),
+          position: LatLng(fromplaceDetail.lat, fromplaceDetail.lng),
+          icon: _mylocation,
+          infoWindow: InfoWindow(
+            title: "pick up",
+            snippet: fromplaceDetail.formattedAddress,
+          ),
+        ),
+      );
+    
+      _markers.add(
+        Marker(
+          markerId: MarkerId(toPlaceDetail.placeId),
+          position: LatLng(toPlaceDetail.lat, toPlaceDetail.lng),
+          icon: _mydestination,
+          infoWindow: InfoWindow(
+            title: "destination",
+            snippet: toPlaceDetail.formattedAddress,
+          ),
+        ),
+      );
+        });
 
-    if (toPlaceDetail != null) {
-      await setPolylines();
+    // Choose which method to use based on your needs
+    // For example, you could use a configuration flag:
+    if (useApiKey) {
+      await setPolylineWithApiKey();
+    } else {
+      await setPolylineWithoutApiKey();
     }
-  }
+    }
 
   void getLatLngBounds(LatLng from, LatLng to) {
     if (from.latitude > to.latitude && from.longitude > to.longitude) {
@@ -386,120 +384,58 @@ setPolylines() async {
 
   Widget _buildToFromDestination() {
     return Positioned(
-        bottom: 5,
-        left: 5,
-        right: 5,
-        child: Card(
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-            child: const Column(
-              children: <Widget>[
-                // TypeAheadField(
-                //   direction: AxisDirection.up,
-                //   debounceDuration: Duration(milliseconds: 500),
-                //   textFieldConfiguration: TextFieldConfiguration(
-                //     controller: _fromLocationController,
-                //     //  autofocus: true,
-                //     style: const TextStyle(fontSize: 12),
-                //     decoration: InputDecoration(
-                //         icon: const Icon(
-                //           FontAwesomeIcons.taxi,
-                //           color: Colors.green,
-                //         ),
-                //         suffixIcon: IconButton(
-                //             icon: const Icon(
-                //               Icons.close,
-                //               color: Colors.grey,
-                //               size: 15,
-                //             ),
-                //             onPressed: () {
-                //               _fromLocationController.clear();
-                //             }),
-                //         labelText: "From"),
-                //   ),
-                //   suggestionsCallback: (pattern) async {
-                //     sessionToken ??= uuid.v4();
-                //     googleMapServices =
-                //         GoogleMapServices(sessionToken: sessionToken);
-                //     return await googleMapServices.getSuggestions(pattern);
-                //   },
-                //   itemBuilder: (context, suggetion) {
-                //     return ListTile(
-                //       title: Text(
-                //         suggetion?.description,
-                //         style: const TextStyle(fontSize: 12),
-                //       ),
-                //     );
-                //   },
-                //   onSuggestionSelected: (suggetion) async {
-                //     _fromLocationController.text = suggetion.description;
-                //     _fromPlaceDetail = await googleMapServices.getPlaceDetail(
-                //       suggetion.placeId,
-                //       sessionToken,
-                //     );
-
-                //     //    _moveCamera(_fromPlaceDetail, _toPlaceDetail);
-                //     sessionToken = null;
-                //   },
-                // ),
-                // TypeAheadField(
-                //   direction: AxisDirection.up,
-                //   debounceDuration: const Duration(milliseconds: 500),
-                //   textFieldConfiguration: TextFieldConfiguration(
-                //     controller: _toLocationController,
-                //     //  autofocus: true,
-                //     style: const TextStyle(fontSize: 12),
-                //     decoration: InputDecoration(
-                //         icon: const Icon(
-                //           FontAwesomeIcons.dotCircle,
-                //           color: Colors.red,
-                //         ),
-                //         suffixIcon: IconButton(
-                //             icon: const Icon(
-                //               Icons.close,
-                //               color: Colors.grey,
-                //               size: 15,
-                //             ),
-                //             onPressed: () {
-                //               _toLocationController.clear();
-                //             }),
-                //         labelText: "To"),
-                //   ),
-                //   suggestionsCallback: (pattern) async {
-                //     sessionToken ??= uuid.v4();
-                //     googleMapServices =
-                //         GoogleMapServices(sessionToken: sessionToken);
-                //     return await googleMapServices.getSuggestions(pattern);
-                //   },
-                //   itemBuilder: (context, suggetion) {
-                //     return ListTile(
-                //       title: Text(
-                //         suggetion.description,
-                //         style: const TextStyle(fontSize: 12),
-                //       ),
-                //     );
-                //   },
-                //   onSuggestionSelected: (suggetion) async {
-                //     _toLocationController.text = suggetion.description;
-                //     _toPlaceDetail = await googleMapServices.getPlaceDetail(
-                //       suggetion.placeId,
-                //       sessionToken,
-                //     );
-                //     _moveCamera(_fromPlaceDetail, _toPlaceDetail);
-                //     sessionToken = null;
-                //   },
-                // ),
-                SizedBox(
-                  height: 45,
-                ),
-              ],
-            ),
+      bottom: 5,
+      left: 5,
+      right: 5,
+      child: Card(
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-        ));
+          child: Column(
+            children: <Widget>[
+              LocationTypeAheadField(
+                controller: _fromLocationController,
+                labelText: "From",
+                icon: FontAwesomeIcons.taxi,
+                iconColor: Colors.green,
+                onSuggestions: (pattern) async {
+                  sessionToken ??= uuid.v4();
+                  googleMapServices =
+                      GoogleMapServices(sessionToken: sessionToken);
+                  return await googleMapServices.getSuggestions(pattern);
+                },
+                onPlaceSelected: (placeDetail) {
+                  _fromPlaceDetail = placeDetail;
+                  sessionToken = null;
+                },
+              ),
+              const SizedBox(height: 8),
+              LocationTypeAheadField(
+                controller: _toLocationController,
+                labelText: "To",
+                icon: FontAwesomeIcons.dotCircle,
+                iconColor: Colors.red,
+                onSuggestions: (pattern) async {
+                  sessionToken ??= uuid.v4();
+                  googleMapServices =
+                      GoogleMapServices(sessionToken: sessionToken);
+                  return await googleMapServices.getSuggestions(pattern);
+                },
+                onPlaceSelected: (placeDetail) {
+                  _toPlaceDetail = placeDetail;
+                  _moveCamera(_fromPlaceDetail, _toPlaceDetail);
+                  sessionToken = null;
+                },
+              ),
+              const SizedBox(height: 45),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildHelloWidget() {
@@ -569,8 +505,7 @@ setPolylines() async {
                               child: Row(
                                 children: <Widget>[
                                   Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
@@ -655,53 +590,52 @@ setPolylines() async {
                       // },
                     ),
                   ),
-MaterialButton(
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(5),
-  ),
-  color: Constatnts.primaryColor,
-  onPressed: () {
-    // Define the bounds based on from and to locations
-    LatLngBounds bounds = LatLngBounds(
-      southwest: LatLng(
-        _fromPlaceDetail.lat < _toPlaceDetail.lat
-            ? _fromPlaceDetail.lat
-            : _toPlaceDetail.lat,
-        _fromPlaceDetail.lng < _toPlaceDetail.lng
-            ? _fromPlaceDetail.lng
-            : _toPlaceDetail.lng,
-      ),
-      northeast: LatLng(
-        _fromPlaceDetail.lat > _toPlaceDetail.lat
-            ? _fromPlaceDetail.lat
-            : _toPlaceDetail.lat,
-        _fromPlaceDetail.lng > _toPlaceDetail.lng
-            ? _fromPlaceDetail.lng
-            : _toPlaceDetail.lng,
-      ),
-    );
+                  MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    color: Constatnts.primaryColor,
+                    onPressed: () {
+                      // Define the bounds based on from and to locations
+                      LatLngBounds bounds = LatLngBounds(
+                        southwest: LatLng(
+                          _fromPlaceDetail.lat < _toPlaceDetail.lat
+                              ? _fromPlaceDetail.lat
+                              : _toPlaceDetail.lat,
+                          _fromPlaceDetail.lng < _toPlaceDetail.lng
+                              ? _fromPlaceDetail.lng
+                              : _toPlaceDetail.lng,
+                        ),
+                        northeast: LatLng(
+                          _fromPlaceDetail.lat > _toPlaceDetail.lat
+                              ? _fromPlaceDetail.lat
+                              : _toPlaceDetail.lat,
+                          _fromPlaceDetail.lng > _toPlaceDetail.lng
+                              ? _fromPlaceDetail.lng
+                              : _toPlaceDetail.lng,
+                        ),
+                      );
 
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) {
-    //       return TaxiMovementPage(
-    //         key: UniqueKey(), // Providing a unique key
-    //         fromPlaceDetail: _fromPlaceDetail,
-    //         toPlaceDetail: _toPlaceDetail,
-    //         polylines: _polylines,
-    //         polylineCoordinates: polylineCoordinates,
-    //         bound: bounds, // Providing the bounds
-    //       );
-    //     },
-    //   ),
-    // );
-  },
-  child: Text(
-    "Confirm",
-    style: CustomStyles.cardBoldTextStyle,
-  ),
-),
-
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return TaxiMovementPage(
+                              key: UniqueKey(), // Providing a unique key
+                              fromPlaceDetail: _fromPlaceDetail,
+                              toPlaceDetail: _toPlaceDetail,
+                              polylines: _polylines,
+                              polylineCoordinates: polylineCoordinates,
+                              bound: bounds, // Providing the bounds
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Confirm",
+                      style: CustomStyles.cardBoldTextStyle,
+                    ),
+                  ),
                 ],
               )
             ],

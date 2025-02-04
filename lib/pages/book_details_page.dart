@@ -24,14 +24,14 @@ class _RideDetailsPageState extends State<RideDetailsPage> {
   bool isMapCreated = false;
   final Key _mapKey = UniqueKey();
   final Set<Marker> _markers = {};
-  static const LatLng _center = LatLng(6.5244, 3.3792);
+  static const LatLng _center = LatLng(36.81814804505188, -120.7463292270478);
   LatLng _lastMapPosition = _center;
 
   String? _mapStyle;  // Nullable String to accommodate possible null values
   BitmapDescriptor? _mylocation;
   BitmapDescriptor? _taxilocation;
-  final LatLng _initialCameraPosition = const LatLng(9.005130740036533, 38.766785045325534);
-  final LatLng _destinationPosition = const LatLng(8.986392611040223, 38.79658346040148);
+  final LatLng _initialCameraPosition = const LatLng(34.063152038321014, -118.24831097713354);
+  final LatLng _destinationPosition = const LatLng(34.32879883241455, -111.81521904547932);
 
   LatLngBounds? bound;
 
@@ -199,7 +199,7 @@ class _RideDetailsPageState extends State<RideDetailsPage> {
                           padding: const EdgeInsets.only(left: 20.0, top: 30.0),
                           child: _buildRideInfo(
                               "From",
-                              "Dembal City Center, African Avenue",
+                              "USA, California",
                               "My Home",
                               Colors.green),
                         ),
@@ -207,8 +207,8 @@ class _RideDetailsPageState extends State<RideDetailsPage> {
                             padding: const EdgeInsets.only(left: 20, top: 10),
                             child: _buildRideInfo(
                                 "To",
-                                "Bole International Airport",
-                                "National travel Enterance Gate",
+                                "Los Angeles,Hollywood Boulevard ",
+                                "Tourism Destination",
                                 Colors.red)),
                         Container(
                             margin: const EdgeInsets.all(20),
@@ -234,11 +234,11 @@ class _RideDetailsPageState extends State<RideDetailsPage> {
                           title: Text("DRIVER",
                               style: CustomStyles.smallLightTextStyle),
                           subtitle: Text(
-                            "ALemu Gebru",
+                            "Mesay.K",
                             style: CustomStyles.cardBoldDarkTextStyle,
                           ),
                           trailing: Text(
-                            "30 Sep 2024",
+                            "29 Jan 2025",
                             style: CustomStyles.smallLightTextStyle,
                           ),
                         ),
@@ -251,7 +251,7 @@ class _RideDetailsPageState extends State<RideDetailsPage> {
                           title: Text("PAYMENT",
                               style: CustomStyles.smallLightTextStyle),
                           subtitle: Text(
-                            "ETB 500",
+                            "USD 500",
                             style: CustomStyles.cardBoldDarkTextStyle,
                           ),
                           trailing: Text(

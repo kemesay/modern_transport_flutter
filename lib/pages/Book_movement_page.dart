@@ -27,6 +27,7 @@ class TaxiMovementPage extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _TaxiMovementPageState createState() => _TaxiMovementPageState();
 }
 
@@ -194,7 +195,7 @@ class _TaxiMovementPageState extends State<TaxiMovementPage> {
                         ),
                         Text(
                           !_hasTripEnded
-                              ? "Your Destination in 5 minutes"
+                              ? "Your Destination in 10 minutes"
                               : "Your trip has ended",
                           style: CustomStyles.normalTextStyle,
                         ),
