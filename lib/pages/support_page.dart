@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modern_transportation/utils/constants.dart';
 import 'package:modern_transportation/utils/styles.dart';
 import 'package:modern_transportation/widgets/header_widget.dart';
+import 'package:modern_transportation/widgets/popular_places_carousel.dart';
 
 class SupportPage extends StatelessWidget {
   static const routeName = "support";
@@ -100,23 +100,27 @@ class SupportPage extends StatelessWidget {
                           const SizedBox(
                             height: 25,
                           ),
-                               _buildRowWidgets(FontAwesomeIcons.link, "Web-site",
+                          _buildRowWidgets(FontAwesomeIcons.link, "Web-site",
                               "https://odatransportation.com"),
                           const SizedBox(
                             height: 25,
                           ),
-                          _buildRowWidgets(FontAwesomeIcons.facebook,
-                              "facebook", "https://web.facebook.com/Oda.Transportation"),
+                          _buildRowWidgets(
+                              FontAwesomeIcons.facebook,
+                              "facebook",
+                              "https://web.facebook.com/Oda.Transportation"),
                           const SizedBox(
                             height: 25,
                           ),
-                          _buildRowWidgets(FontAwesomeIcons.twitter, "twitter/X",
-                              "https://x.com/odatransport?s=21"),
+                          _buildRowWidgets(FontAwesomeIcons.twitter,
+                              "twitter/X", "https://x.com/odatransport?s=21"),
                           const SizedBox(
                             height: 25,
                           ),
-                          _buildRowWidgets(FontAwesomeIcons.instagram,
-                              "instagram", "https://www.instagram.com/odatransportation/profilecar"),
+                          _buildRowWidgets(
+                              FontAwesomeIcons.instagram,
+                              "instagram",
+                              "https://www.instagram.com/odatransportation/profilecar"),
                         ],
                       ),
                     )
@@ -149,6 +153,8 @@ class SupportPage extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 18),
+          const PopularPlacesCarousel(),
         ],
       ),
     );

@@ -6,7 +6,7 @@ import 'package:modern_transportation/pages/home_page.dart';
 import 'package:modern_transportation/pages/sign_up_page.dart';
 import 'package:modern_transportation/widgets/gradient_button.dart';
 import 'package:modern_transportation/widgets/login_field.dart';
-import 'package:modern_transportation/widgets/social_button.dart';
+import 'package:modern_transportation/widgets/popular_places_carousel.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const MapPage(),
+                builder: (context) => const HomeScreen(),
               ),
               (route) => false,
             );
@@ -63,22 +63,22 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: [
                   Image.asset('assets/images/image15.png'),
-                  const SizedBox(height: 50),
-                  const SocialButton(
-                      iconPath: 'assets/svgs/g_logo.svg',
-                      label: 'Continue with Google'),
                   const SizedBox(height: 20),
-                  const SocialButton(
-                    iconPath: 'assets/svgs/f_logo.svg',
-                    label: 'Continue with Facebook',
-                    horizontalPadding: 90,
-                  ),
-                  const SizedBox(height: 15),
-                  const Text(
-                    'or',
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  const SizedBox(height: 15),
+                  // const SocialButton(
+                  //     iconPath: 'assets/svgs/g_logo.svg',
+                  //     label: 'Continue with Google'),
+                  // const SizedBox(height: 20),
+                  // const SocialButton(
+                  //   iconPath: 'assets/svgs/f_logo.svg',
+                  //   label: 'Continue with Facebook',
+                  //   horizontalPadding: 90,
+                  // ),
+                  // const SizedBox(height: 15),
+                  // const Text(
+                  //   'or',
+                  //   style: TextStyle(fontSize: 17),
+                  // ),
+                  // const SizedBox(height: 15),
                   LoginField(
                     hintText: 'Email',
                     controller: emailController,
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const SizedBox(height: 15),
-                                    Row(
+                      Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // const Text("Forgot your password?"),
@@ -147,14 +147,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Forgot Password?',
                           style: TextStyle(
                             color: Color.fromARGB(255, 153, 213, 153),
-                            fontSize: 17,
+                            fontSize: 15,
                           ),
                         ),
                       ),
                     ],
                   ),
 
-                  const SizedBox(height: 15),
+                    const SizedBox(height: 10),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -173,12 +173,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Sign Up',
                           style: TextStyle(
                             color: Color.fromARGB(255, 153, 213, 153),
-                            fontSize: 17,
+                            fontSize: 15,
                           ),
                         ),
                       ),
                     ],
                   ),
+                const SizedBox(height: 12),
+
+                  const PopularPlacesCarousel(),
                 ],
               ),
             ),

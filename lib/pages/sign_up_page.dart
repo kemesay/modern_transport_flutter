@@ -4,7 +4,8 @@ import 'package:modern_transportation/bloc/auth_bloc.dart'; // Assuming SignUp u
 import 'package:modern_transportation/pages/login_page.dart';
 import 'package:modern_transportation/pallete.dart';
 import 'package:modern_transportation/widgets/login_field.dart'; // Reusable input fields
-import 'package:modern_transportation/widgets/gradient_button.dart'; // Custom button
+import 'package:modern_transportation/widgets/gradient_button.dart';
+import 'package:modern_transportation/widgets/popular_places_carousel.dart'; // Custom button
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -147,7 +148,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       LoginField(
                         hintText: 'Password',
                         controller: _passwordController,
-                        obscureText: _passwordVisible, // Pass the visibility state
+                        obscureText:
+                            _passwordVisible, // Pass the visibility state
                         suffixIcon: IconButton(
                           icon: Icon(
                             _passwordVisible
@@ -189,19 +191,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             hintText: 'Confirm Password',
-                             suffixIcon: IconButton(
-                          icon: Icon(
-                            _passwordVisible
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible =
-                                  !_passwordVisible; // Toggle visibility state
-                            });
-                          },
-                        ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _passwordVisible
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible =
+                                      !_passwordVisible; // Toggle visibility state
+                                });
+                              },
+                            ),
                           ),
                           obscureText: _obscureConfirmPassword,
                           validator: (value) {
@@ -235,12 +237,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: const Text('Login', style: TextStyle( color: Color.fromARGB(255, 153, 213, 153),
-                        fontSize: 17,
-                      ),),
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 153, 213, 153),
+                                fontSize: 17,
+                              ),
+                            ),
                           ),
                         ],
                       ),
+                      const SizedBox(height: 18),
+                      const PopularPlacesCarousel(),
                     ],
                   ),
                 ),

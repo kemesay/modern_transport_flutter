@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_transportation/pages/otp_page.dart';
 import 'package:modern_transportation/widgets/header_widget.dart';
+import 'package:modern_transportation/widgets/popular_places_carousel.dart';
 
 class PhoneRegPage extends StatefulWidget {
   static const routeName = "phone-page";
@@ -12,7 +13,6 @@ class PhoneRegPage extends StatefulWidget {
 }
 
 class _PhoneRegPageState extends State<PhoneRegPage> {
-
   @override
   Widget build(BuildContext context) {
     final mQ = MediaQuery.of(context).size;
@@ -30,7 +30,7 @@ class _PhoneRegPageState extends State<PhoneRegPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-               const  Text(
+                const Text(
                   "Hello, nice to meet you!",
                   style: TextStyle(
                     color: Color(0xff303030),
@@ -146,6 +146,8 @@ class _PhoneRegPageState extends State<PhoneRegPage> {
               ),
             ),
           ),
+          const SizedBox(height: 18),
+          const PopularPlacesCarousel(),
         ],
       ),
     );

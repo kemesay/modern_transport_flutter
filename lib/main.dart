@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
             '/login-page': (context) => const LoginScreen(),
             '/forgot-password-page': (context) => const ForgotPasswordScreen(),
             '/sign-up-page': (context) => const SignUpScreen(),
-            '/map-page': (context) => const MapPage(),
+            '/map-page': (context) => const HomeScreen(),
             '/otp-page': (context) => const OtpPage(),
             '/reset-password-page': (context) => const ResetPasswordScreen(resetToken: '',),
             '/promo-code-page': (context) => const PromoCodePage(),
@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
           },
           
           // Define the initial route (login screen)
-          home: const RideHistoryPage(),
+          home: const PhoneRegPage(),
         ),
       ),
     );

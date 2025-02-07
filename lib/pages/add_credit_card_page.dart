@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:modern_transportation/utils/styles.dart';
 import 'package:modern_transportation/widgets/header_widget.dart';
+import 'package:modern_transportation/widgets/popular_places_carousel.dart';
 
 class AddCreditCardPage extends StatefulWidget {
   static const routeName = "add-credit-card";
@@ -124,6 +124,8 @@ class _AddCreditCardPageState extends State<AddCreditCardPage> {
               ),
             ),
           ),
+          const SizedBox(height: 18),
+          const PopularPlacesCarousel(),
         ],
       ),
     );

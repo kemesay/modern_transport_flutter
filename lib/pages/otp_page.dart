@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modern_transportation/utils/styles.dart';
 import 'package:modern_transportation/widgets/header_widget.dart';
+import 'package:modern_transportation/widgets/popular_places_carousel.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'book_page.dart';
 
@@ -79,19 +80,24 @@ class _OtpPageState extends State<OtpPage> {
                     Expanded(
                       flex: 3,
                       child: PinCodeTextField(
-                        appContext: context,  // Add the appContext parameter here
-                        keyboardType: TextInputType.number, // Corrected to keyboardType
+                        appContext:
+                            context, // Add the appContext parameter here
+                        keyboardType:
+                            TextInputType.number, // Corrected to keyboardType
                         length: 6,
                         obscureText: false, // Correct spelling of 'obscureText'
                         animationType: AnimationType.fade,
                         animationDuration: const Duration(milliseconds: 300),
                         autoFocus: true,
                         pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.underline,  // Define the shape here
-                          inactiveColor: Colors.black,  // Inactive color for unfilled fields
-                          fieldHeight: 30,  // Field height
-                          fieldWidth: 25,  // Field width
-                          borderRadius: BorderRadius.circular(5),  // Define border radius here
+                          shape: PinCodeFieldShape
+                              .underline, // Define the shape here
+                          inactiveColor: Colors
+                              .black, // Inactive color for unfilled fields
+                          fieldHeight: 30, // Field height
+                          fieldWidth: 25, // Field width
+                          borderRadius: BorderRadius.circular(
+                              5), // Define border radius here
                         ),
                         onChanged: (value) {
                           setState(() {
@@ -152,6 +158,8 @@ class _OtpPageState extends State<OtpPage> {
               ),
             ),
           ),
+          const SizedBox(height: 12),
+          const PopularPlacesCarousel(),
         ],
       ),
     );

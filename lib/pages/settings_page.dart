@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modern_transportation/utils/constants.dart';
 import 'package:modern_transportation/utils/styles.dart';
 import 'package:modern_transportation/widgets/header_widget.dart';
+import 'package:modern_transportation/widgets/popular_places_carousel.dart';
 
 
 class SettingsPage extends StatelessWidget {
@@ -187,10 +188,12 @@ class SettingsPage extends StatelessWidget {
                     color: Colors.grey,
                     size: 20,
                   ),
-                  Text("Add New Plaace",
+                  Text("Add New Place",
                       style: CustomStyles.smallLightTextStyle),
                 ],
-              ))
+              )),
+            const SizedBox(height: 18),
+          const PopularPlacesCarousel(),
         ],
       ),
     );
